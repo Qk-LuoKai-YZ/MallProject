@@ -18,7 +18,9 @@ public enum ServiceResultEnum {
 
     DB_ERROR("database error"),
 
-    DATA_NOT_EXIST("未查询到该记录");
+    DATA_NOT_EXIST("未查询到该记录"),
+
+    SAME_CATEGORY_EXIST("已存在同级同名的分类！");
     private String result;
 
     ServiceResultEnum(String result) {
