@@ -19,6 +19,19 @@ import java.util.List;
 public interface NewBeeMallGoodsMapper {
 
     /**
+     * 根据首页的搜索框 查询分页数据
+     * @param pageUtil
+     * @return
+     */
+    List<NewBeeMallGoods> findNewBeeMallGoodsListBySearch(PageQueryUtil pageUtil);
+
+    /**
+     * 根据首页的搜索框 查询总数
+     * @param pageUtil
+     * @return
+     */
+    int getTotalNewBeeMallGoods(PageQueryUtil pageUtil);
+    /**
      * 新增一条记录
      * @param record
      * @return
@@ -64,12 +77,7 @@ public interface NewBeeMallGoodsMapper {
      */
     List<NewBeeMallGoods> findNewBeeMallGoodsList(PageQueryUtil pageQueryUtil);
 
-    /**
-     * 总数查询
-     * @param pageQueryUtil
-     * @return
-     */
-    int getTotalNewBeeMallGoods(PageQueryUtil pageQueryUtil);
+
 
     /**
      * 批量修改销售状态

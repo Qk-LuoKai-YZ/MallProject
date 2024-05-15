@@ -4,6 +4,7 @@ import org.link.newbeemall.common.Constants;
 import org.link.newbeemall.common.NewBeeMallCategoryLevelEnum;
 import org.link.newbeemall.common.ServiceResultEnum;
 import org.link.newbeemall.controller.vo.NewBeeMallIndexCategoryVO;
+import org.link.newbeemall.controller.vo.SearchPageCategoryVO;
 import org.link.newbeemall.controller.vo.SecondLevelCategoryVO;
 import org.link.newbeemall.controller.vo.ThirdLevelCategoryVO;
 import org.link.newbeemall.dao.GoodsCategoryMapper;
@@ -155,5 +156,24 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
         } else {
             return null;
         }
+    }
+
+    @Override
+    public SearchPageCategoryVO getCategoriesForSearch(Long categoryId) {
+        SearchPageCategoryVO searchPageCategoryVO = new SearchPageCategoryVO();
+        GoodsCategory thirdLevelGoodsCategory = goodsCategoryMapper.selectByPrimaryKey(categoryId);
+        if (thirdLevelGoodsCategory != null && thirdLevelGoodsCategory.getCategoryLevel() == NewBeeMallCategoryLevelEnum.LEVEL_THREE.getLevel()) {
+            //获取当前三级分类的二级分类
+            GoodsCategory secondLevelGoodsCategory = goodsCategoryMapper.selectByPrimaryKey(thirdLevelGoodsCategory.getParentId());
+            if (secondLevelGoodsCategory != null && secondLevelGoodsCategory.getCategoryLevel() == NewBeeMallCategoryLevelEnum.LEVEL_TWO.getLevel()) {
+                //获取当前二级分类下的三级分类List
+                List<GoodsCategory> thirdLevelCategories = goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelGoodsCategory.getCategoryId()), NewBeeMallCategoryLevelEnum.LEVEL_THREE.getLevel(), Constants.SEARCH_CATEGORY_NUMBER);
+                searchPageCategoryVO.setCurrentCategoryName(thirdLevelGoodsCategory.getCategoryName());
+                searchPageCategoryVO.setSecondLevelCategoryName(secondLevelGoodsCategory.getCategoryName());
+                searchPageCategoryVO.setThirdLevelCategoryList(thirdLevelCategories);
+                return searchPageCategoryVO;
+            }
+        }
+        return null;
     }
 }

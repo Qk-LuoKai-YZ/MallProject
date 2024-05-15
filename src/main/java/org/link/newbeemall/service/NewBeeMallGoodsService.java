@@ -16,6 +16,12 @@ import org.link.newbeemall.util.PageResult;
  */
 public interface NewBeeMallGoodsService {
 
+    /**
+     * 商品搜索的列表
+     * @param pageUtil
+     * @return
+     */
+    PageResult serchNewBeeMallGoods(PageQueryUtil pageUtil);
 
     /**
      * 添加商品

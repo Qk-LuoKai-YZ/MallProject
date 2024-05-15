@@ -1,7 +1,7 @@
 package org.link.newbeemall.service;
 
 import org.link.newbeemall.controller.vo.NewBeeMallIndexCategoryVO;
-import org.link.newbeemall.dao.GoodsCategoryMapper;
+import org.link.newbeemall.controller.vo.SearchPageCategoryVO;
 import org.link.newbeemall.entity.GoodsCategory;
 import org.link.newbeemall.util.PageQueryUtil;
 import org.link.newbeemall.util.PageResult;
@@ -75,4 +75,11 @@ public interface NewBeeMallCategoryService {
      * @return
      */
     List<NewBeeMallIndexCategoryVO> getCategoriesForIndex();
+
+    /**
+     * 返回三级分类数据(首页-搜索页调用)
+     * @param categoryId
+     * @return
+     */
+    SearchPageCategoryVO getCategoriesForSearch(Long categoryId);
 }
