@@ -2,6 +2,7 @@ package org.link.newbeemall.config;
 
 import org.link.newbeemall.common.Constants;
 import org.link.newbeemall.interceptor.AdminLoginInterceptor;
+import org.link.newbeemall.interceptor.NewBeeMallCartNumberInterceptor;
 import org.link.newbeemall.interceptor.NewBeeMallLoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,10 @@ public class NeeBeeMallWebMvcConfigurer implements WebMvcConfigurer {
 
     @Autowired
     private NewBeeMallLoginInterceptor newBeeMallLoginInterceptor;
+
+    @Autowired
+    private NewBeeMallCartNumberInterceptor newBeeMallCartNumberInterceptor;
+
     /**
      * 拦截器
      * @param registry
@@ -57,6 +62,13 @@ public class NeeBeeMallWebMvcConfigurer implements WebMvcConfigurer {
                 .addPathPatterns("/personal/updateInfo")
                 .addPathPatterns("/selectPayType")
                 .addPathPatterns("/payPage");
+
+        // 购物车中的数量统一处理
+        registry.addInterceptor(newBeeMallCartNumberInterceptor)
+                .excludePathPatterns("/admin/**")
+                .excludePathPatterns("/register")
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/logout");
     }
 
     /**

@@ -37,7 +37,14 @@ public enum ServiceResultEnum {
 
     LOGIN_VERIFY_CODE_NULL("请输入验证码！"),
 
-    LOGIN_VERIFY_CODE_ERROR("验证码错误！");
+    LOGIN_VERIFY_CODE_ERROR("验证码错误！"),
+    GOODS_PUT_DOWN("商品已下架！"),
+
+    SHOPPING_CART_ITEM_LIMIT_NUMBER_ERROR("超出单个商品的最大购买数量"),
+
+    SHOPPING_CART_ITEM_TOTAL_NUMBER_ERROR("超出购物车最大容量！"),
+    NO_PERMISSION_ERROR("用户无权限！"),
+    OPERATE_ERROR("操作失败");
     private String result;
 
     ServiceResultEnum(String result) {
