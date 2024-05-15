@@ -3,6 +3,7 @@ package org.link.newbeemall.service.impl;
 import org.link.newbeemall.common.ServiceResultEnum;
 import org.link.newbeemall.dao.CarouselMapper;
 import org.link.newbeemall.entity.Carousel;
+import org.link.newbeemall.entity.GoodsCategory;
 import org.link.newbeemall.service.NewBeeMallCarouselService;
 import org.link.newbeemall.util.PageQueryUtil;
 import org.link.newbeemall.util.PageResult;
@@ -30,6 +31,7 @@ public class NewBeeMallCarouselServiceImpl implements NewBeeMallCarouselService 
 
     @Autowired
     private CarouselMapper carouselMapper;
+
     @Override
     public PageResult getCarouselPage(PageQueryUtil pageUtil) {
         List<Carousel> carouselList = carouselMapper.findCarouselList(pageUtil);
@@ -77,4 +79,6 @@ public class NewBeeMallCarouselServiceImpl implements NewBeeMallCarouselService 
         }
         return carouselMapper.deleteBatch(ids) > 0;
     }
+
+
 }

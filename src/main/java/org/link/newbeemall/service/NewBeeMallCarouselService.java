@@ -3,6 +3,7 @@ package org.link.newbeemall.service;
 
 
 import org.link.newbeemall.entity.Carousel;
+import org.link.newbeemall.entity.GoodsCategory;
 import org.link.newbeemall.util.PageQueryUtil;
 import org.link.newbeemall.util.PageResult;
 
@@ -44,6 +45,5 @@ public interface NewBeeMallCarouselService {
      * @return 返回批量删除操作的结果，通常为成功或失败的布尔值
      */
     Boolean deleteBatch(Integer[] ids);
-
 
 }

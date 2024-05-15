@@ -123,6 +123,8 @@ public class UploadController {
                     }
                 }
                 multipartFiles.get(i).transferTo(destFile);
+                // NewBeeMallUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")  获得访问主机的地址 去掉了访问路径
+                // 返回该图片上传之后保存到服务器的详细地址，且返回给前端用于回显
                 fileNames.add(NewBeeMallUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/" + newFileName);
             } catch (IOException e) {
                 e.printStackTrace();

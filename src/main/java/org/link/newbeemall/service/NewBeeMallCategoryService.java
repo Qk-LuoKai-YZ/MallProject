@@ -62,4 +62,11 @@ public interface NewBeeMallCategoryService {
      */
     List<GoodsCategory> selectByLevelAndParentIdsAndNumber(List<Long> parentIds, int categoryLevel);
 
+    /**
+     * 根据id查询分类记录
+     * @param categoryId
+     * @return
+     */
+    GoodsCategory getGoodsCategoryById(Long categoryId);
+
 }

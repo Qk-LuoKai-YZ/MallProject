@@ -19,6 +19,11 @@ public class NewBeeMallUtils {
         return effectiveURI;
     }
 
+    /**
+     * 清理和转换输入的字符串，以避免潜在的XSS（跨站脚本攻击）和SQL注入等安全风险。
+     * @param value
+     * @return
+     */
     public static String cleanString(String value) {
         if (!StringUtils.hasText(value)) {
             return "";

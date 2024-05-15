@@ -89,4 +89,9 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
         return goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(parentIds, categoryLevel, 0);//0代表查询所有
 
     }
+
+    @Override
+    public GoodsCategory getGoodsCategoryById(Long categoryId) {
+        return goodsCategoryMapper.selectByPrimaryKey(categoryId);
+    }
 }
