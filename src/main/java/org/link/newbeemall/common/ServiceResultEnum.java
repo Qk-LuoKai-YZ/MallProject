@@ -26,7 +26,18 @@ public enum ServiceResultEnum {
     SAME_GOODS_EXIST("已存在相同的商品信息"),
     GOODS_CATEGORY_ERROR("分类数据异常！"),
 
-    SAME_INDEX_CONFIG_EXIST("已存在相同的首页配置项");
+    SAME_INDEX_CONFIG_EXIST("已存在相同的首页配置项"),
+    SAME_LOGIN_NAME_EXIST("用户名已存在"),
+    LOGIN_USER_LOCKED("用户已被禁止登录"),
+    LOGIN_ERROR("登录失败"),
+
+    LOGIN_NAME_NULL("请输入登录名！"),
+
+    LOGIN_PASSWORD_NULL("请输入密码！"),
+
+    LOGIN_VERIFY_CODE_NULL("请输入验证码！"),
+
+    LOGIN_VERIFY_CODE_ERROR("验证码错误！");
     private String result;
 
     ServiceResultEnum(String result) {

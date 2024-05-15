@@ -2,6 +2,7 @@ package org.link.newbeemall.config;
 
 import org.link.newbeemall.common.Constants;
 import org.link.newbeemall.interceptor.AdminLoginInterceptor;
+import org.link.newbeemall.interceptor.NewBeeMallLoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -25,17 +26,37 @@ public class NeeBeeMallWebMvcConfigurer implements WebMvcConfigurer {
     @Autowired
     private AdminLoginInterceptor adminLoginInterceptor;
 
+    @Autowired
+    private NewBeeMallLoginInterceptor newBeeMallLoginInterceptor;
     /**
      * 拦截器
      * @param registry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        // 后台登陆拦截
         registry.addInterceptor(adminLoginInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/login")
                 .excludePathPatterns("/admin/dist/**")
                 .excludePathPatterns("/admin/plugins/**");
+
+        // 商城页面登陆拦截
+        registry.addInterceptor(newBeeMallLoginInterceptor)
+                .excludePathPatterns("/admin/**")
+                .excludePathPatterns("/register")
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/logout")
+                .addPathPatterns("/goods/detail/**")
+                .addPathPatterns("/shop-cart")
+                .addPathPatterns("/shop-cart/**")
+                .addPathPatterns("/saveOrder")
+                .addPathPatterns("/orders")
+                .addPathPatterns("/orders/**")
+                .addPathPatterns("/personal")
+                .addPathPatterns("/personal/updateInfo")
+                .addPathPatterns("/selectPayType")
+                .addPathPatterns("/payPage");
     }
 
     /**
