@@ -24,7 +24,9 @@ public enum ServiceResultEnum {
 
     GOODS_NOT_EXIST("商品不存在"),
     SAME_GOODS_EXIST("已存在相同的商品信息"),
-    GOODS_CATEGORY_ERROR("分类数据异常！");
+    GOODS_CATEGORY_ERROR("分类数据异常！"),
+
+    SAME_INDEX_CONFIG_EXIST("已存在相同的首页配置项");
     private String result;
 
     ServiceResultEnum(String result) {

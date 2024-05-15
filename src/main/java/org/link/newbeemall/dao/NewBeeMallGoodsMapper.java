@@ -39,6 +39,8 @@ public interface NewBeeMallGoodsMapper {
      */
     NewBeeMallGoods selectByPrimaryKey(Long id);
 
+    List<NewBeeMallGoods> selectByPrimaryKeys(List<Long> goodsIds);
+
     /**
      * 根据商品id和商品分类id查询商品信息
      * @param goodsName

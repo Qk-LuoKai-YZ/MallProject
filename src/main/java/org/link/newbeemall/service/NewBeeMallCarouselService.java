@@ -2,6 +2,7 @@
 package org.link.newbeemall.service;
 
 
+import org.link.newbeemall.controller.vo.NewBeeMallIndexCarouselVO;
 import org.link.newbeemall.entity.Carousel;
 import org.link.newbeemall.entity.GoodsCategory;
 import org.link.newbeemall.util.PageQueryUtil;
@@ -46,4 +47,10 @@ public interface NewBeeMallCarouselService {
      */
     Boolean deleteBatch(Integer[] ids);
 
+    /**
+     * 返回固定数量的轮播图对象(首页调用)
+     * @param indexCarouselNumber
+     * @return
+     */
+    List<NewBeeMallIndexCarouselVO> getCarouselsForIndex(int indexCarouselNumber);
 }

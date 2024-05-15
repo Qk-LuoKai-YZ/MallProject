@@ -1,17 +1,22 @@
 package org.link.newbeemall.service.impl;
 
 import org.link.newbeemall.common.ServiceResultEnum;
+import org.link.newbeemall.controller.vo.NewBeeMallIndexCarouselVO;
 import org.link.newbeemall.dao.CarouselMapper;
 import org.link.newbeemall.entity.Carousel;
 import org.link.newbeemall.entity.GoodsCategory;
 import org.link.newbeemall.service.NewBeeMallCarouselService;
+import org.link.newbeemall.util.BeanUtil;
 import org.link.newbeemall.util.PageQueryUtil;
 import org.link.newbeemall.util.PageResult;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.xml.crypto.Data;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -81,4 +86,16 @@ public class NewBeeMallCarouselServiceImpl implements NewBeeMallCarouselService 
     }
 
 
+    @Override
+    public List<NewBeeMallIndexCarouselVO> getCarouselsForIndex(int number) {
+        List<NewBeeMallIndexCarouselVO> newBeeMallIndexCarouselVOS = new ArrayList<>(number);
+
+        List<Carousel> carousels = carouselMapper.findCarouselsByNum(number);
+
+        if (!CollectionUtils.isEmpty(carousels)){
+            // 本质还是调用了 BeanUtils.copyProperties(source, target, ignoreProperties);
+            newBeeMallIndexCarouselVOS = BeanUtil.copyList(carousels, NewBeeMallIndexCarouselVO.class);
+        }
+        return newBeeMallIndexCarouselVOS;
+    }
 }
