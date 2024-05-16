@@ -32,4 +32,5 @@ public class Constants {
     public final static int SHOPPING_CART_ITEM_LIMIT_NUMBER = 5;//购物车中单个商品的最大购买数量(可根据自身需求修改)
     public final static int SHOPPING_CART_ITEM_TOTAL_NUMBER = 10;//购物车中商品的最大数量(可根据自身需求修改)
 
+    public final static int ORDER_SEARCH_PAGE_LIMIT = 3;//我的订单列表分页的默认条数(每页3条)
 }

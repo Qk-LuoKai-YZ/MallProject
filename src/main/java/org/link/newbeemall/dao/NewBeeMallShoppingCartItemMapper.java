@@ -67,4 +67,11 @@ public interface NewBeeMallShoppingCartItemMapper {
      * @return
      */
     List<NewBeeMallShoppingCartItem> selectByUserId(@Param("newBeeMallUserId") Long newBeeMallUserId, @Param("number") int shoppingCartItemTotalNumber);
+
+    /**
+     * 批量删除购物车数据
+     * @param itemIdList
+     * @return
+     */
+    int deleteBatch(List<Long> itemIdList);
 }

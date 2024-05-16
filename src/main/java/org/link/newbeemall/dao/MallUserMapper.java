@@ -36,4 +36,18 @@ public interface MallUserMapper {
      * @return
      */
     MallUser selectByLoginNameAndPasswd(@Param("loginName") String loginName, @Param("password") String password);
+
+    /**
+     * 根据用户id查询信息
+     * @param userId
+     * @return
+     */
+    MallUser selectByPrimaryKey(Long userId);
+
+    /**
+     * 更新用户信息
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(MallUser record);
 }

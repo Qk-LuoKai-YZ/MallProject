@@ -132,7 +132,7 @@ public class ShoppingCartController {
     }
 
     /**
-     * 结算
+     * 结算页面
      * @param request
      * @param httpSession
      * @return

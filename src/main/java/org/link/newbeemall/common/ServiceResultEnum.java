@@ -44,7 +44,17 @@ public enum ServiceResultEnum {
 
     SHOPPING_CART_ITEM_TOTAL_NUMBER_ERROR("超出购物车最大容量！"),
     NO_PERMISSION_ERROR("用户无权限！"),
-    OPERATE_ERROR("操作失败");
+    OPERATE_ERROR("操作失败"),
+
+    NULL_ADDRESS_ERROR("地址不能为空"),
+    SHOPPING_ITEM_ERROR("购物车数据异常"),
+
+    SHOPPING_ITEM_COUNT_ERROR("库存不足！"),
+    ORDER_PRICE_ERROR("订单价格异常"), ORDER_NOT_EXIST_ERROR("订单不存在"),
+    ORDER_ITEM_NOT_EXIST_ERROR("订单项不存在！"),
+    ORDER_STATUS_ERROR("无权限"),
+
+    CLOSE_ORDER_ERROR("关闭订单失败！");
     private String result;
 
     ServiceResultEnum(String result) {

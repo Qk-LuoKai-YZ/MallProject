@@ -34,6 +34,19 @@
         goods_detail_content
     </sql>
 
+    <update id="updateStockNum">
+        <foreach collection="stockNumDTOS" item="stockNumDTO">
+            update tb_newbee_mall_goods_info set stock_num = stock_num-#{stockNumDTO.goodsCount}
+            where goods_id = #{stockNumDTO.goodsId} and stock_num>=#{stockNumDTO.goodsCount} and goods_sell_status = 0;
+        </foreach>
+    </update>
+    <update id="recoverStockNum">
+        <foreach collection="stockNumDTOS" item="stockNumDTO">
+            update tb_newbee_mall_goods_info set stock_num = stock_num+#{stockNumDTO.goodsCount}
+            where goods_id = #{stockNumDTO.goodsId} and stock_num>=#{stockNumDTO.goodsCount} and goods_sell_status = 0;
+        </foreach>
+    </update>
+
     <insert id="insert" parameterType="org.link.newbeemall.entity.NewBeeMallGoods">
         insert into tb_newbee_mall_goods_info (goods_id, goods_name, goods_intro,
                                                goods_cover_img, goods_carousel, original_price,

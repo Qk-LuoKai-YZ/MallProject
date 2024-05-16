@@ -3,18 +3,18 @@ package org.link.newbeemall.controller.mall;
 import cn.hutool.captcha.ShearCaptcha;
 import org.link.newbeemall.common.Constants;
 import org.link.newbeemall.common.ServiceResultEnum;
+import org.link.newbeemall.controller.vo.NewBeeMallUserVO;
+import org.link.newbeemall.entity.MallUser;
 import org.link.newbeemall.service.NewBeeMallUserService;
 import org.link.newbeemall.util.MD5Util;
 import org.link.newbeemall.util.Result;
 import org.link.newbeemall.util.ResultGenerator;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -34,6 +34,49 @@ public class PersonalController {
     @Resource
     private NewBeeMallUserService newBeeMallUserService;
 
+
+    // 订单支付的时候需要用到--收货地址等个人信息
+    /**
+     * 个人信息
+     * @param request
+     * @param httpSession
+     * @return
+     */
+    @GetMapping("/personal")
+    public String personalPage(HttpServletRequest request,
+                               HttpSession httpSession) {
+        request.setAttribute("path", "personal");
+        return "mall/personal";
+    }
+
+
+    @GetMapping("/personal/addresses")
+    public String addressesPage() {
+        return "mall/addresses";
+    }
+
+    /***
+     * 修改个人信息
+     * @param mallUser
+     * @param httpSession
+     * @return
+     */
+    @PostMapping("/personal/updateInfo")
+    @ResponseBody
+    public Result updateInfo(@RequestBody MallUser mallUser, HttpSession httpSession) {
+        NewBeeMallUserVO mallUserTemp = newBeeMallUserService.updateUserInfo(mallUser, httpSession);
+        if (mallUserTemp == null) {
+            Result result = ResultGenerator.genFailResult("修改失败");
+            return result;
+        } else {
+            //返回成功
+            Result result = ResultGenerator.genSuccessResult();
+            return result;
+        }
+    }
+
+
+    // ——————————————————————————————————————————————————————————————————————————————
     /**
      * 登陆页面跳转
      * @return

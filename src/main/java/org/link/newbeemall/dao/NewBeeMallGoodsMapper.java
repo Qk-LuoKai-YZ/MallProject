@@ -2,6 +2,7 @@ package org.link.newbeemall.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.link.newbeemall.entity.NewBeeMallGoods;
+import org.link.newbeemall.entity.StockNumDTO;
 import org.link.newbeemall.util.PageQueryUtil;
 
 import java.util.List;
@@ -77,8 +78,6 @@ public interface NewBeeMallGoodsMapper {
      */
     List<NewBeeMallGoods> findNewBeeMallGoodsList(PageQueryUtil pageQueryUtil);
 
-
-
     /**
      * 批量修改销售状态
      * @param goodsIds
@@ -86,4 +85,19 @@ public interface NewBeeMallGoodsMapper {
      * @return
      */
     int batchUpdateSellStatus(@Param("goodsId") Long[] goodsIds,@Param("sellStatus") int sellStatus);
+
+    /**
+     * 批量修改库存-减少
+     * @param stockNumDTOS
+     * @return
+     */
+    // TODO 购物车结算商品大于一个的时候，动态sql批量减少库存sql报错
+    int updateStockNum(@Param("stockNumDTOS") List<StockNumDTO> stockNumDTOS);
+
+    /**
+     * 批量修改库存-增加
+     * @param stockNumDTOS
+     * @return
+     */
+    int recoverStockNum(@Param("stockNumDTOS") List<StockNumDTO> stockNumDTOS);
 }

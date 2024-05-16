@@ -1,5 +1,8 @@
 package org.link.newbeemall.service;
 
+import org.link.newbeemall.controller.vo.NewBeeMallUserVO;
+import org.link.newbeemall.entity.MallUser;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -32,4 +35,12 @@ public interface NewBeeMallUserService {
      * @return
      */
     String login(String loginName, String passwordMD5, HttpSession httpSession);
+
+    /**
+     * 更新个人信息
+     * @param mallUser
+     * @param httpSession
+     * @return
+     */
+    NewBeeMallUserVO updateUserInfo(MallUser mallUser, HttpSession httpSession);
 }

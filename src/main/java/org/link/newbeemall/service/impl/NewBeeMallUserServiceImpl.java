@@ -8,8 +8,10 @@ import org.link.newbeemall.entity.MallUser;
 import org.link.newbeemall.service.NewBeeMallUserService;
 import org.link.newbeemall.util.BeanUtil;
 import org.link.newbeemall.util.MD5Util;
+import org.link.newbeemall.util.NewBeeMallUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 
@@ -68,5 +70,30 @@ public class NewBeeMallUserServiceImpl implements NewBeeMallUserService {
             return ServiceResultEnum.SUCCESS.getResult();
         }
         return ServiceResultEnum.LOGIN_ERROR.getResult();
+    }
+
+    @Override
+    public NewBeeMallUserVO updateUserInfo(MallUser mallUser, HttpSession httpSession) {
+        NewBeeMallUserVO userTemp = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+        MallUser userFromDB = mallUserMapper.selectByPrimaryKey(userTemp.getUserId());
+        if (userFromDB != null) {
+            if (StringUtils.hasText(mallUser.getNickName())) {
+                userFromDB.setNickName(NewBeeMallUtils.cleanString(mallUser.getNickName()));
+            }
+            if (StringUtils.hasText(mallUser.getAddress())) {
+                userFromDB.setAddress(NewBeeMallUtils.cleanString(mallUser.getAddress()));
+            }
+            if (StringUtils.hasText(mallUser.getIntroduceSign())) {
+                userFromDB.setIntroduceSign(NewBeeMallUtils.cleanString(mallUser.getIntroduceSign()));
+            }
+            if (mallUserMapper.updateByPrimaryKeySelective(userFromDB) > 0) {
+                // 更新之后的数据还要重新放入session
+                NewBeeMallUserVO newBeeMallUserVO = new NewBeeMallUserVO();
+                BeanUtil.copyProperties(userFromDB, newBeeMallUserVO);
+                httpSession.setAttribute(Constants.MALL_USER_SESSION_KEY, newBeeMallUserVO);
+                return newBeeMallUserVO;
+            }
+        }
+        return null;
     }
 }
